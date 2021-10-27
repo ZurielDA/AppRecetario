@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppRecetario">
         <activity
+            android:name=".NuevaRecetaSopa"
+            android:exported="false" />
+        <activity
+            android:name=".CatalogoSopas"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
