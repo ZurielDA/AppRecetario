@@ -3,129 +3,94 @@ package com.app.apprecetario
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.app.apprecetario.utilidad.AdminIngredientes
 
 class NuevaRecetaSopa : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nueva_receta_sopa)
 
-        //Elementos para agregacion de un ingrediente
-        val etIngrediente = findViewById<EditText>(R.id.etIngrediente)
-        val etCantidad = findViewById<EditText>(R.id.etCantidad)
-        val spnCantidad = findViewById<Spinner>(R.id.spnCantidad)
-        val btnAgregarIngrediente = findViewById<Button>(R.id.btnAgregarIngredienteRegistro)
-        val lvIngredientes = findViewById<ListView>(R.id.lvIngredientes)
+        IniciarComponentes()
 
-        //Medidas de los ingredientes
-        val listaCantidades = arrayOf("Kg","Pza")
-        val adaptador = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, listaCantidades)
-        spnCantidad.adapter = adaptador
-        
-        //Cantidad de ingredientes y sus elementos
-        var numeroIngrediente: Int = 0
-        var columnaIncial: Int = 0
-        var columnaFinal: Int = 2
-        
-        //Lista de ingredientes
-        var listaIngredientes = arrayOf<Array<String>>()
-        var ingrediente = arrayOf<String>()
+    }
 
-        //Agrega un nuevo ingredientes
-        btnAgregarIngrediente.setOnClickListener {
-                                                            // ¿Este for es necesario?
-            for (i in numeroIngrediente..numeroIngrediente) {
-                var elemento = arrayOf<String>()
-                //Registro de cada elemento del ingrediente
-                for (j in columnaIncial..columnaFinal) {
-                    if (j == 0){
-                        elemento += etIngrediente.getText().toString()
-                    }
-                    if (j == 1){
-                        elemento += etCantidad.getText().toString()
-                    }
-                    if (j == 2){
-                        elemento += spnCantidad.selectedItem.toString()
-                    }
-                }
-                // Elementos del ingrediente arreglo
-                listaIngredientes += elemento
-                elemento = arrayOf("")
-            }
-            //Registro de ingrediente en fila
-            ingrediente = arrayOf("")
-            var filaIngrediente: String = ""
+    private fun IniciarComponentes() {
 
-            //La matriz listaIngredientes pasa a ser un arreglo ingrediente
-            for (elemento in listaIngredientes ) {
-                for (dato in elemento) {
-                    filaIngrediente = filaIngrediente + dato + " "
-                }
-                ingrediente += filaIngrediente
+        var adminIngredientes = AdminIngredientes()
 
-                filaIngrediente = ""
-            }
-            //Se añade el arreglo a la listView
-            val listaIngredientes = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, ingrediente)
-            lvIngredientes.adapter = listaIngredientes
-        }
-
-        var ingredienteEleminar: String = ""
-
-        lvIngredientes.setOnItemClickListener { adapterView, view, i, l ->
-            ingredienteEleminar = ingrediente[i]
-        }
-
-        val btnEliminar = findViewById<Button>(R.id.btnEliminarIngredienteRegistro)
-
-        btnEliminar.setOnClickListener {
-            var listaIngredientesAuxiliar = arrayOf<Array<String>>()
-            var filaIngrediente: String = ""
-
-            //La matriz listaIngredientes pasa a ser un arreglo ingrediente
-            for (elemento in listaIngredientes ) {
-                for (dato in elemento) {
-                    filaIngrediente = filaIngrediente + dato + " "
-                }
-                if (ingredienteEleminar != filaIngrediente ){
-                    listaIngredientesAuxiliar = listaIngredientesAuxiliar + elemento
-                }
-                filaIngrediente = ""
-            }
-            listaIngredientes = listaIngredientesAuxiliar
-            numeroIngrediente  -= 1
-
-            //Registro de ingrediente en fila
-            ingrediente = arrayOf("")
-
-            filaIngrediente = ""
-
-            //La matriz listaIngredientes pasa a ser un arreglo ingrediente
-            for (elemento in listaIngredientes ) {
-                for (dato in elemento) {
-                    filaIngrediente = filaIngrediente + dato + " "
-                }
-                ingrediente += filaIngrediente
-
-                filaIngrediente = ""
-            }
-            //Se añade el arreglo a la listView
-            val listaIngredientes = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, ingrediente)
-            lvIngredientes.adapter = listaIngredientes
-        }
-
-
+        val etNombreReceta = findViewById<EditText>(R.id.etNombreReceta)
         val etProceso = findViewById<EditText>(R.id.etProceso)
         val etEnlaceUno = findViewById<EditText>(R.id.etEnlaceUno)
         val etEnlaceDos = findViewById<EditText>(R.id.etEnlaceDos)
+
+        // Medida de ingredientes
+        val spnCantidad = findViewById<Spinner>(R.id.spnCantidad)
+        adminIngredientes.listaDespelgable(spnCantidad,this)
+
+        val etIngrediente = findViewById<EditText>(R.id.etIngrediente)
+        val etCantidad = findViewById<EditText>(R.id.etCantidad)
+        val lvIngredientes = findViewById<ListView>(R.id.lvIngredientes)
+
+        var ingrediente = arrayOf<String>()
+        var cantidad = arrayOf<Int>()
+        var medica = arrayOf<String>()
+        var listaIngredientesObtenidos = arrayOf<String>()
+        val btnAgregarIngrediente = findViewById<Button>(R.id.btnAgregarIngredienteRegistro)
+        btnAgregarIngrediente.setOnClickListener {
+
+            if (
+            adminIngredientes.validarDatosIngrediente(this, etIngrediente.getText().toString(),
+                                                       etCantidad.getText().toString()) ) {
+
+            ingrediente += etIngrediente.getText().toString()
+            cantidad += etCantidad.getText().toString().toInt()
+            medica += spnCantidad.selectedItem.toString()
+
+            listaIngredientesObtenidos = adminIngredientes.convertirString(ingrediente,cantidad,medica)
+            adminIngredientes.llenarListView(this, lvIngredientes, listaIngredientesObtenidos)
+
+            etIngrediente.setText("")
+            etCantidad.setText("")
+            spnCantidad.setSelection(0)
+            }
+        }
+
+        var ingredienteEleminar: Int = 0
+        lvIngredientes.setOnItemClickListener { adapterView, view, i, l ->
+            ingredienteEleminar = i
+            Toast.makeText(this, "Se selecciono: ${ingredienteEleminar}", Toast.LENGTH_SHORT).show()
+        }
+
+        val btnEliminar = findViewById<Button>(R.id.btnEliminarIngredienteRegistro)
+        btnEliminar.setOnClickListener {
+
+            ingrediente = adminIngredientes.EliminarElementoString(ingredienteEleminar,ingrediente)
+            cantidad = adminIngredientes.EliminarElementoInt(ingredienteEleminar,cantidad)
+            medica = adminIngredientes.EliminarElementoString(ingredienteEleminar,medica)
+
+            listaIngredientesObtenidos = adminIngredientes.convertirString(ingrediente,cantidad,medica)
+            adminIngredientes.llenarListView(this, lvIngredientes, listaIngredientesObtenidos)
+
+        }
+
         val btnGuardar = findViewById<Button>(R.id.btnGuardarRegistro)
+        btnGuardar.setOnClickListener {
+            if (adminIngredientes.validarDatosReceta(this,etNombreReceta.getText().toString(), ingrediente,
+                cantidad, medica, etProceso.getText().toString(), etEnlaceUno.getText().toString(),
+                etEnlaceDos.getText().toString())){
+            }
+
+            /*
+                falta aguardar los datos
+             */
+
+        }
+
         val btnCancelar = findViewById<Button>(R.id.btnCancelarRegistro)
-
-
-
-
-
-
-
+        btnCancelar.setOnClickListener {
+            finish()
+        }
 
     }
+
 }

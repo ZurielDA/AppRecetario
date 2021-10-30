@@ -10,10 +10,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val imgBtn = findViewById<ImageButton>(R.id.imgBtnSopas)
-        imgBtn.setOnClickListener {
+        IniciarComponentes()
+    }
+
+    private fun IniciarComponentes() {
+
+        val imgBtnPostres = findViewById<ImageButton>(R.id.imgBtnPostres)
+        imgBtnPostres.setOnClickListener {
+
+        }
+
+        val imgBtnSopas = findViewById<ImageButton>(R.id.imgBtnSopas)
+        imgBtnSopas.setOnClickListener {
             val ventanaSopas = Intent(this,CatalogoSopas::class.java)
             startActivity(ventanaSopas)
+        }
+
+        val imgBtnGuisados = findViewById<ImageButton>(R.id.imgBtnGuisados)
+        imgBtnGuisados.setOnClickListener {
+
+        }
+
+        val imgBtnPastas = findViewById<ImageButton>(R.id.imgBtnPastas)
+        imgBtnPastas.setOnClickListener {
+
         }
 
     }

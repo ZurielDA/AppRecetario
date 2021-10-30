@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Lista de Recetas de Sopas"
+            android:textAlignment="center"
             android:textSize="24sp"
             tools:textAlignment="center" />
 
@@ -51,6 +52,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <ListView
+            android:id="@+id/lvListaRecetas"
             android:layout_width="match_parent"
             android:layout_height="506dp">
 

@@ -14,59 +14,68 @@
         android:text="Nueva Receta de Sopa"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="26dp"
         android:gravity="center_vertical"
-        android:text="Lista de Ingredientes:"
+        android:text="Nombre de Receta:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/etNombreReceta"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAgregarIngredienteRegistro" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/etNombreReceta"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="65dp"
         android:gravity="center_vertical"
         android:text="Ingrediente:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="Proceso:"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/etProceso"
-        app:layout_constraintStart_toStartOf="@+id/etProceso"
-        app:layout_constraintTop_toBottomOf="@+id/btnEliminarIngredienteRegistro" />
+        app:layout_constraintBottom_toTopOf="@+id/btnAgregarIngredienteRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="490dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/btnAgregarIngredienteRegistro"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/etNombreReceta">
 
         <EditText
             android:id="@+id/etIngrediente"
@@ -82,7 +91,7 @@
 
         <EditText
             android:id="@+id/etCantidad"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -108,73 +117,60 @@
         android:text="Agregar Ingrediente"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="11dp"
+        android:gravity="center_vertical"
+        android:text="Lista de Ingredientes:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/lvIngredientes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAgregarIngredienteRegistro" />
+
+    <ListView
+        android:id="@+id/lvIngredientes"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="2dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/btnEliminarIngredienteRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ListView
-                android:id="@+id/lvIngredientes"
-                android:layout_width="match_parent"
-                android:layout_height="138dp" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
         android:id="@+id/btnEliminarIngredienteRegistro"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="13dp"
         android:text="Eliminar"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/etProceso"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/lvIngredientes"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <Button
-        android:id="@+id/btnCancelarRegistro"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="24dp"
-        android:text="Cancelar"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnGuardarRegistro"
-        app:layout_constraintTop_toBottomOf="@+id/etEnlaceDos"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/btnGuardarRegistro"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="91dp"
-        android:layout_marginEnd="35dp"
-        android:text="Guardar"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCancelarRegistro"
-        app:layout_constraintEnd_toStartOf="@+id/btnCancelarRegistro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnCancelarRegistro"
-        tools:ignore="TouchTargetSizeCheck" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="221dp"
+        android:gravity="center_vertical"
+        android:text="Proceso:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/etProceso"
+        app:layout_constraintEnd_toStartOf="@+id/btnEliminarIngredienteRegistro"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etProceso"
@@ -182,7 +178,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="13dp"
         android:ems="10"
         android:fadeScrollbars="true"
         android:gravity="start|top"
@@ -191,7 +187,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/btnEliminarIngredienteRegistro"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -199,7 +195,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="6dp"
         android:text="Informacion Externa: "
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/etEnlaceDos"
@@ -210,8 +206,7 @@
         android:id="@+id/etEnlaceUno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="12dp"
         android:ems="10"
         android:hint="https://www.Comida.com"
@@ -220,13 +215,14 @@
         app:layout_constraintEnd_toStartOf="@+id/etEnlaceDos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <EditText
         android:id="@+id/etEnlaceDos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="19dp"
         android:ems="10"
         android:hint="https://www.Comida.com"
         android:inputType="textPersonName"
@@ -235,6 +231,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etEnlaceUno"
         app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnGuardarRegistro"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginEnd="29dp"
+        android:text="Guardar"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCancelarRegistro"
+        app:layout_constraintEnd_toStartOf="@+id/btnCancelarRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnCancelarRegistro"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnCancelarRegistro"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="16dp"
+        android:text="Cancelar"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnGuardarRegistro"
+        app:layout_constraintTop_toBottomOf="@+id/etEnlaceDos"
         tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
