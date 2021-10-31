@@ -1,4 +1,4 @@
-package com.app.apprecetario
+package com.app.apprecetario.BD
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -11,18 +11,18 @@ class AdminSQLlite (context: Context, name:String, factory: SQLiteDatabase.Curso
 
 
         db.execSQL("create table if not exists receta( id integer primary key autoincrement," +
-                        "nombre text," +
-                        "proceso text,"+
-                        "enlaceUno text,"+
-                        "enlaceDos text," +
-                        "Categoria int)")
+                "nombre text," +
+                "proceso text,"+
+                "enlaceUno text,"+
+                "enlaceDos text," +
+                "categoria int)")
 
         db.execSQL("create table if not exists ingrediente( id integer primary key autoincrement," +
-                        "id_receta integer," +
-                        "nombre text," +
-                        "cantidad real," +
-                        "tipo text," +
-                        "foreign key(id_receta) references receta(id) on delete cascade)")
+                "id_receta integer," +
+                "nombre text," +
+                "cantidad real," +
+                "tipo text," +
+                "foreign key(id_receta) references receta(id))")
 
     }
 

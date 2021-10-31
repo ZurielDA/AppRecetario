@@ -7,10 +7,11 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
+import com.app.apprecetario.Receta
 
 class AdminIngredientes {
 
-     fun convertirString(ingrediente:Array<String>, cantidad: Array<Int>, medida: Array<String>): Array<String>{
+    fun convertirString(ingrediente:Array<String>, cantidad: Array<Int>, medida: Array<String>): Array<String>{
         var listaIngredientes = arrayOf<String>()
 
         for (i in 0..(ingrediente.size-1)){
@@ -48,9 +49,16 @@ class AdminIngredientes {
         desplegable.adapter = adaptador
     }
 
-    fun llenarListView( contexto: Context,listViewEntrada: ListView, arrayEntrada: Array<String>){
-        val listaIngredientes = ArrayAdapter<String>(contexto,android.R.layout.simple_list_item_1, arrayEntrada)
-        listViewEntrada.adapter = listaIngredientes
+    fun llenarListView( contexto: Context,listViewEntrada: ListView, arrayEntrada1: Array<String>,
+                        arrayEntrada2: MutableList<Receta>){
+
+        if (arrayEntrada1.size > 0){
+            val listaIngredientes = ArrayAdapter<String>(contexto,android.R.layout.simple_list_item_1, arrayEntrada1)
+            listViewEntrada.adapter = listaIngredientes
+        }else{
+            val listaIngredientes = ArrayAdapter<Receta>(contexto,android.R.layout.simple_list_item_1, arrayEntrada2)
+            listViewEntrada.adapter = listaIngredientes
+        }
     }
 
     fun validarDatosIngrediente(context: Context, ingrediente: String, cantidad: String): Boolean{
