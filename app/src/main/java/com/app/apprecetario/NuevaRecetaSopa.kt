@@ -10,9 +10,32 @@ import com.app.apprecetario.utilidad.AdminIngredientes
 
 class NuevaRecetaSopa : AppCompatActivity() {
 
+    var tipoCatalogo: String = ""
+    var elementoCategoria: String = ""
+    var categoria: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nueva_receta_sopa)
+
+        val bundle = intent.extras
+        val ct = bundle?.getString("Categoria")
+        val tc = bundle?.getString("Elemento")
+        val nc = bundle?.getInt("NumeroCategoria")
+
+        if (ct != null) {
+            tipoCatalogo = ct
+
+        }
+        if (tc != null) {
+            elementoCategoria = tc
+        }
+        if (nc != null) {
+            categoria = nc
+        }
+
+        val tvTituloNuevaReceta = findViewById<TextView>(R.id.tvTituloNuevaReceta)
+        tvTituloNuevaReceta.setText("Nueva Receta de " + elementoCategoria)
 
         IniciarComponentes()
     }
@@ -23,11 +46,12 @@ class NuevaRecetaSopa : AppCompatActivity() {
         val etProceso = findViewById<EditText>(R.id.etProceso)
         val etEnlaceUno = findViewById<EditText>(R.id.etEnlaceUno)
         val etEnlaceDos = findViewById<EditText>(R.id.etEnlaceDos)
+        val etNumeroPersonas = findViewById<EditText>(R.id.etNumeroPersona)
 
         // Medida de ingredientes
         val spnCantidad = findViewById<Spinner>(R.id.spnCantidad)
         var adminIngredientes = AdminIngredientes()
-        adminIngredientes.listaDespelgable(spnCantidad,this)
+        adminIngredientes.listaDespelgableString(spnCantidad,this)
 
         val etIngrediente = findViewById<EditText>(R.id.etIngrediente)
         val etCantidad = findViewById<EditText>(R.id.etCantidad)
@@ -75,20 +99,27 @@ class NuevaRecetaSopa : AppCompatActivity() {
             adminIngredientes.llenarListView(this, lvIngredientes, listaIngredientesObtenidos,arrayNull)
         }
 
-        var categoria = 2
         val btnGuardar = findViewById<Button>(R.id.btnGuardarRegistro)
         btnGuardar.setOnClickListener {
-
             var nombreReceta = etNombreReceta.getText().toString()
             var proceso = etProceso.getText().toString()
             var enlaceUno = etEnlaceUno.getText().toString()
             var enlaceDos = etEnlaceDos.getText().toString()
+            var numeroPersona = etNumeroPersonas.getText().toString()
 
             if (adminIngredientes.validarDatosReceta(this, nombreReceta, ingrediente, cantidad, medica,
-                proceso, enlaceUno, enlaceDos)){
+                    proceso, enlaceUno, enlaceDos, numeroPersona)){
                 var daoReceta = DAOReceta()
+                var valorInt: Int = 0
+
+                try {
+                    valorInt = numeroPersona.toInt()
+                } catch (nfe: NumberFormatException){
+                    nfe.printStackTrace()
+                }
+
                 var registro = daoReceta.registrarRecetas(this, nombreReceta, proceso, enlaceUno, enlaceDos,
-                    categoria, ingrediente, cantidad, medica)
+                    categoria, ingrediente, cantidad, medica, valorInt)
                 if(registro){
                     Toast.makeText(this, "Se registro la receta", Toast.LENGTH_LONG).show()
                 }else {
@@ -96,6 +127,7 @@ class NuevaRecetaSopa : AppCompatActivity() {
                 }
                 finish()
             }
+
         }
 
         val btnCancelar = findViewById<Button>(R.id.btnCancelarRegistro)

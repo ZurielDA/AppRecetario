@@ -43,11 +43,23 @@ class AdminIngredientes {
         return arrayAuxiliar
     }
 
-    fun listaDespelgable(desplegable: Spinner, contexto: Context){
+    fun listaDespelgableString(desplegable: Spinner, contexto: Context){
         val listaCantidades = arrayOf("Kg", "Gr", "Lt", "Ml","Pza")
         val adaptador = ArrayAdapter<String>(contexto, R.layout.simple_spinner_item, listaCantidades)
         desplegable.adapter = adaptador
     }
+
+    fun listaDespelgableInt(desplegable: Spinner, contexto: Context){
+        var listaNumeros = arrayOf<String>()
+
+        for (i in 1..100){
+            listaNumeros += i.toString()
+        }
+
+        val adaptador = ArrayAdapter<String>(contexto, R.layout.simple_spinner_item, listaNumeros)
+        desplegable.adapter = adaptador
+    }
+
 
     fun llenarListView( contexto: Context,listViewEntrada: ListView, arrayEntrada1: Array<String>,
                         arrayEntrada2: MutableList<Receta>){
@@ -97,7 +109,9 @@ class AdminIngredientes {
     }
 
     fun validarDatosReceta(context: Context, NombreReceta: String, ingrediente: Array<String> ,cantidad: Array<Int>,
-                           medica: Array<String> , Proceso: String ,EnlaceUno: String, EnlaceDos: String): Boolean {
+                           medica: Array<String> , Proceso: String ,EnlaceUno: String, EnlaceDos: String,
+                           numeroPersona:String ): Boolean {
+
         if (NombreReceta == "" && ingrediente.size < 1 && cantidad.size < 1  && medica.size < 1 && Proceso == "" &&
             EnlaceUno == "" && EnlaceDos == ""){
             Toast.makeText(context, "Los campos estan vacios. Favor de llenarlos",
@@ -121,6 +135,19 @@ class AdminIngredientes {
             return false
         }
 
+        try {
+            val valorInt = numeroPersona.toInt()
+            if (valorInt <= 0){
+                Toast.makeText(context, "Cantidad de personas debe ser mayor a cero.",
+                    Toast.LENGTH_SHORT).show()
+                return false
+            }
+        } catch (nfe: NumberFormatException){
+            Toast.makeText(context, "La cantidad de personas debe ser un valor númerico de tipo entero",
+                Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         /*
         if (URLUtil.isValidUrl(EnlaceUno)){
             Toast.makeText(context, "La liga introducida no es valida.",
@@ -136,4 +163,5 @@ class AdminIngredientes {
 
         return true
     }
+
 }

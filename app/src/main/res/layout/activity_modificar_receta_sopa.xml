@@ -4,64 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NuevaRecetaSopa">
+    tools:context=".ModificarRecetaSopa">
 
     <TextView
         android:id="@+id/tvTituloNuevaReceta"
-        android:layout_width="401dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
         android:gravity="center"
-        android:text="Nueva Receta de Sopa"
+        android:text="Modificar Receta de Sopa"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/etNumeroPersona"
-        app:layout_constraintEnd_toStartOf="@+id/etNumeroPersona"
-        app:layout_constraintStart_toStartOf="@+id/etNumeroPersona"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etNombreReceta"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:hint="Nombre Receta"
-        android:inputType="textPersonName"
-        android:textSize="15sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/etNumeroPersona"
-        app:layout_constraintEnd_toStartOf="@+id/etNumeroPersona"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginBottom="65dp"
+        android:layout_marginStart="10dp"
         android:gravity="center_vertical"
         android:text="Ingrediente:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAgregarIngredienteRegistro"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutRegistrar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNumeroPersona" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutRegistrar"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="38dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAgregarIngredienteRegistro"
+        app:layout_constraintBottom_toTopOf="@+id/btnAgregarIngredienteRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <EditText
             android:id="@+id/etIngrediente"
@@ -104,7 +85,7 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutRegistrar"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
@@ -112,7 +93,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="11dp"
         android:gravity="center_vertical"
         android:text="Lista de Ingredientes:"
         android:textSize="18sp"
@@ -124,7 +104,6 @@
         android:id="@+id/lvIngredientes"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="2dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/btnEliminarIngredienteRegistro"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,36 +114,78 @@
         android:id="@+id/btnEliminarIngredienteRegistro"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="13dp"
         android:text="Eliminar"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/etProceso"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutModifcar"
+        app:layout_constraintEnd_toEndOf="@+id/btnModificar"
+        app:layout_constraintStart_toStartOf="@+id/btnModificar"
         app:layout_constraintTop_toBottomOf="@+id/lvIngredientes"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutModifcar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btnModificar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEliminarIngredienteRegistro">
+
+        <EditText
+            android:id="@+id/etIngredienteModificar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Ingrediente"
+            android:inputType="textPersonName"
+            android:textSize="15sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/etCantidadModificar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Cantidad"
+            android:inputType="textPersonName"
+            android:textSize="15sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Spinner
+            android:id="@+id/spnCantidadModificar"
+            android:layout_width="150dp"
+            android:layout_height="41dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="223dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="217dp"
         android:gravity="center_vertical"
         android:text="Proceso:"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/etProceso"
-        app:layout_constraintEnd_toStartOf="@+id/btnEliminarIngredienteRegistro"
+        app:layout_constraintEnd_toStartOf="@+id/btnModificar"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etProceso"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:fadeScrollbars="true"
         android:gravity="start|top"
@@ -173,26 +194,23 @@
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEliminarIngredienteRegistro"
+        app:layout_constraintTop_toBottomOf="@+id/btnModificar"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="6dp"
         android:text="Informacion Externa: "
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/etEnlaceDos"
-        app:layout_constraintEnd_toEndOf="@+id/etEnlaceUno"
+        app:layout_constraintStart_toStartOf="@+id/etEnlaceUno"
         app:layout_constraintTop_toBottomOf="@+id/etProceso" />
 
     <EditText
         android:id="@+id/etEnlaceUno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginEnd="12dp"
         android:ems="10"
         android:hint="https://www.Comida.com"
@@ -208,7 +226,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="15dp"
         android:ems="10"
         android:hint="https://www.Comida.com"
         android:inputType="textPersonName"
@@ -223,8 +241,8 @@
         android:id="@+id/btnGuardarRegistro"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginEnd="28dp"
         android:text="Guardar"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/btnCancelarRegistro"
@@ -237,8 +255,8 @@
         android:id="@+id/btnCancelarRegistro"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="6dp"
         android:text="Cancelar"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -250,9 +268,9 @@
     <EditText
         android:id="@+id/etNumeroPersona"
         android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="13dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="9dp"
         android:ems="10"
         android:hint="Cantidad de Personas"
         android:inputType="textPersonName"
@@ -262,5 +280,34 @@
         app:layout_constraintStart_toEndOf="@+id/etNombreReceta"
         app:layout_constraintTop_toBottomOf="@+id/tvTituloNuevaReceta"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/etNombreReceta"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Nombre Receta"
+        android:inputType="textPersonName"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etNumeroPersona"
+        app:layout_constraintEnd_toStartOf="@+id/etNumeroPersona"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloNuevaReceta"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnModificar"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="12dp"
+        android:text="Modificar"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/etProceso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutModifcar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

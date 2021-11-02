@@ -10,6 +10,7 @@ class Receta {
     var proceso: String = ""
     var enlaceUno: String = ""
     var enlaceDos: String = ""
+    var numeroPersona:Int = 1
 
     constructor(
         idReceta: Int,
@@ -20,7 +21,8 @@ class Receta {
         medida: Array<String>,
         proceso: String,
         enlaceUno: String,
-        enlaceDos: String
+        enlaceDos: String,
+        numeroPersona: Int
     ) {
         this.idReceta = idReceta
         this.nombreReceta = nombreReceta
@@ -31,6 +33,7 @@ class Receta {
         this.proceso = proceso
         this.enlaceUno = enlaceUno
         this.enlaceDos = enlaceDos
+        this.numeroPersona = numeroPersona
     }
     constructor() {
         this.idReceta = idReceta
@@ -42,6 +45,7 @@ class Receta {
         this.proceso = proceso
         this.enlaceUno = enlaceUno
         this.enlaceDos = enlaceDos
+        this.numeroPersona = numeroPersona
     }
 
     override fun toString(): String {

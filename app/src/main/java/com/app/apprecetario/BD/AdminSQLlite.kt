@@ -15,7 +15,8 @@ class AdminSQLlite (context: Context, name:String, factory: SQLiteDatabase.Curso
                 "proceso text,"+
                 "enlaceUno text,"+
                 "enlaceDos text," +
-                "categoria int)")
+                "categoria int," +
+                "numeroPersona int)")
 
         db.execSQL("create table if not exists ingrediente( id integer primary key autoincrement," +
                 "id_receta integer," +
